@@ -117,18 +117,22 @@ def main():
 
         # Check for errors
         str_tokens = "".join(format_tokens)
-
-        if str_tokens == "":
-            sysexit(f"ERROR - Invalid format - No placeholders found in format '{format}'")
-
-        if not str_tokens.isupper() and not str_tokens.islower():
-            sysexit(f"ERROR - Invalid format - Hex and decimal values clash in format '{format}'")
-
         test_letters = "RGB" if str_tokens.isupper() else "rgb"
 
         for letter in test_letters:
-            if letter not in format_tokens:
-                sysexit(f"ERROR - Invalid format - Missing placeholder '{letter}'")
+            if letter not in str_tokens:
+                sysexit(f"ERROR - Invalid format '{format}' - '{letter}' not found")
+
+        for letter in str_tokens:
+            min = 0 if letter in "aA" else 1
+            max = 2 if letter in "RGBA" else 1
+
+            if len(re.findall(letter, str_tokens)) not in range(min, max + 1):
+                sysexit(f"ERROR - Invalid format '{format}' - '{letter}' occurences not in range: [{min};{max}]")
+
+        if not str_tokens.isupper() and not str_tokens.islower():
+            sysexit(f"ERROR - Invalid format '{format}' - Hex and decimal values clash")
+
 
         # Associate provided format with a matching
         # regexp pattern and a list of tokens
