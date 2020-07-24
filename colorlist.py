@@ -136,10 +136,14 @@ def main():
             format_tokens,
             helpers.multi_replace(escaped_format, replacements))
 
-    if args.source == "-":            # Read STDIN
-        source_text = input()
+    if args.source == "-":
+        try:
+            source_text = input()
+        except KeyboardInterrupt:
+            sysexit(1)
+
         source_type = "stdin"
-    elif osp.isfile(args.source):         # Read file contents
+    elif osp.isfile(args.source):
         try:
             with open(args.source) as f:
                 source_text = f.read()
@@ -147,7 +151,7 @@ def main():
             sysexit(f"ERROR - Could not read '{args.source}' - {err.strerror}")
 
         source_type = "file"
-    else:                             # Use as plaintext
+    else:
         source_text = args.source
         source_type = "text"
 
