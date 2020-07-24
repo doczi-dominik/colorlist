@@ -246,6 +246,9 @@ def main():
 
     full_html = list_token_pattern.sub(html_colors, base_template)
 
+    # Convert escaped [] to normal
+    full_html = re.sub(r"\[\[(.*)\]\]", r"[\1]", full_html)
+
     ####################
     # FILE OUTPUT MODE #
     ####################
