@@ -186,10 +186,18 @@ def main():
 
                 groupped[token].append(value)
 
-                # Convert list of values to an int
-                # (mainly for ["f", "f"] -> 0xff -> 255)
-                radix = 16 if token.isupper() else 10
-                color_dict[token] = int("".join(groupped[token]), radix)
+                # Hex values
+                if token.isupper():
+                    color_dict[token] = int("".join(groupped[token]), 16)
+                # Decimal values
+                else:
+                    color_dict[token] = int(groupped[token][0])
+
+            # Support for short hex notation (#RGB)
+            for token in groupped:
+                if token.isupper() and len(groupped[token]) < 2:
+                    digit = groupped[token][0]
+                    color_dict[token] = int(f"0x{digit}{digit}", 16)
 
             # Create and addcolor value
             # from dict of values
