@@ -224,13 +224,13 @@ def main():
         with open(osp.join(template_dir, "page.html")) as f:
             base_template = f.read()
     except OSError as err:
-        sysexit(f"ERROR - Could not read page template ('page.html') - {err.strerror}")
+        sysexit(f"ERROR - Could not read page template '{args.template}/page.html' - {err.strerror}")
 
     try:
         with open(osp.join(template_dir, "color.html")) as f:
             color_template = f.read()
     except OSError as err:
-        sysexit(f"ERROR - Could not read color template ('color.html'): {err.strerror}")
+        sysexit(f"ERROR - Could not read color template '{args.template}/color.html': {err.strerror}")
 
     # Collect colors into a large string
     html_colors = ""
