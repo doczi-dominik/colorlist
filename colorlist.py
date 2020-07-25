@@ -3,7 +3,7 @@ import argparse
 import re
 import os.path as osp
 
-from sys import exit as sysexit, argv
+from sys import stdin, argv, exit as sysexit
 from os import getenv
 from tempfile import NamedTemporaryFile
 from shlex import split as shsplit
@@ -141,11 +141,7 @@ def main():
             helpers.multi_replace(escaped_format, replacements))
 
     if args.source == "-":
-        try:
-            source_text = input()
-        except KeyboardInterrupt:
-            sysexit(1)
-
+       	source_text = stdin.read() 
         source_type = "stdin"
     elif osp.isfile(args.source):
         try:
