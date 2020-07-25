@@ -39,7 +39,7 @@ parser.add_argument(
 parser.add_argument(
     "-s",
     "--stdout",
-    help="Output all colors in a text-based format to the terminal",
+    help="Output all colors in a text-based format to STDOUT",
     action="store_true")
 parser.add_argument(
     "-ab",
@@ -133,7 +133,6 @@ def main():
         if not str_tokens.isupper() and not str_tokens.islower():
             sysexit(f"ERROR - Invalid format '{format}' - Hex and decimal values clash")
 
-
         # Associate provided format with a matching
         # regexp pattern and a list of tokens
         patterns[format] = (
@@ -141,7 +140,13 @@ def main():
             helpers.multi_replace(escaped_format, replacements))
 
     if args.source == "-":
-       	source_text = stdin.read() 
+        try:
+            source_text = stdin.read()
+        except OSError as err:
+            sysexit(f"ERROR - Could not read standard input - {err.strerror}")
+        except KeyboardInterrupt:
+            sysexit(1)
+
         source_type = "stdin"
     elif osp.isfile(args.source):
         try:
