@@ -1,6 +1,8 @@
 # Colorlist
 Extract and display colors conveniently!
 
+![](demo.gif)
+
 ## Contents
 
 #### 1. [Features](#features)
