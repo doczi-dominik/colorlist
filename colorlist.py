@@ -39,7 +39,7 @@ parser.add_argument(
 parser.add_argument(
     "-s",
     "--stdout",
-    help="Output all colors in a text-based format to STDOUT",
+    help="Output all colors in a text-based format to the terminal",
     action="store_true")
 parser.add_argument(
     "-ab",
@@ -54,7 +54,7 @@ parser.add_argument(
 parser.add_argument(
     "-f",
     "--format",
-    help=r"Search for the specified color format. Can be specified repeatedly. [r,g,b,a: Decimal value][R,G,B,A: Single digit hex value][Escape values using '\'] E.g.: #0A0B0C matches '#RRGGBB'; argb(255, 0, 255, 127) matches '\a\r\g\b(a, r, g, b)'",
+    help=r"Search for the specified color format. Can be specified repeatedly. E.g.: #0A0B0C matches '#RRGGBB'; argb(255, 0, 255, 127) matches '\a\r\g\b(a, r, g, b)'",
     action="append")
 parser.add_argument(
     "-t",
@@ -65,7 +65,7 @@ parser.add_argument(
 parser.add_argument(
     "-o",
     "--out",
-    help="Output HTML to FILE ('-' for STDOUT) instead of opening a program",
+    help="Output generated HTML to FILE ('-' for STDOUT) instead of opening a program",
     metavar="FILE/-")
 parser.add_argument(
     "-C",
