@@ -298,6 +298,7 @@ def main():
     temp_file = NamedTemporaryFile(
         mode="w",
         prefix=temp_prefix,
+        suffix=".html",
         delete=False)
     temp_file.write(full_html)
 
